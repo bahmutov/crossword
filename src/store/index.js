@@ -94,18 +94,19 @@ export default new Vuex.Store({
       if (typeof date !== 'string') date = formatDate(date)
 
       return fetch(crosswordUrl(date))
-        .then(response => {
-          if (response.status > 300) {
-            return Promise.reject(response)
-          }
-          return response
-        }).then(response => response.json())
-        .then(payload => {
-          commit('setCrossword', createCrossword(payload))
-          commit('setDate', date)
+      .then(response => {
+        if (response.status > 300) {
+          return Promise.reject(response)
+        }
+        return response
+      })
+      .then(response => response.json())
+      .then(payload => {
+        commit('setCrossword', createCrossword(payload))
+        commit('setDate', date)
 
-          return payload
-        })
+        return payload
+      })
     }
   },
 })
